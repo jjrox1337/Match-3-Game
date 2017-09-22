@@ -31,6 +31,10 @@ public class Tile : MonoBehaviour {
 	private SpriteRenderer render;
 	private bool isSelected = false;
 	Vector2 upleft = new Vector2 (-1, 1);
+	Vector2 upright = new Vector2 (1, 1);
+	Vector2 downleft = new Vector2 (-1, -1);
+	Vector2 downright = new Vector2 (1, -1);
+	private Vector2[] surroundingDirections = new Vector2[] { new Vector2(-1,1), new Vector2(1,1), new Vector2(-1,-1), new Vector2(1,-1), Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 	private Vector2[] adjacentDirections = new Vector2[] { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 
 	private bool matchFound = false;
@@ -51,25 +55,35 @@ public class Tile : MonoBehaviour {
 		render.color = Color.white;
 		previousSelected = null;
 	}
+		
+	/*private void Explode() {
+		List<GameObject> adjacentTiles = GetAllAdjacentTiles ();
+		for (int i = 0; i < adjacentTiles.Count; i++) {
+			if (adjacentTiles [i] != null) {
+				adjacentTiles [i].GetComponent<SpriteRenderer> ().sprite = null;
+			}
+			render.sprite = null;
+		}
+		StopCoroutine (BoardManager.instance.FindNullTiles ());
+		StartCoroutine (BoardManager.instance.FindNullTiles ());
+		GUIManager.instance.MoveCounter--;
+	}*/
+	//bomb before change to "surroundingTiles"
 
 	private void Explode() {
-		/*if (render.sprite != null){
-			render.sprite = null;
-		}*/
-		List<GameObject> matchingTiles = GetAllAdjacentTiles ();
-		for (int i = 0; i < matchingTiles.Count; i++) // 5
-		{
-			if (matchingTiles [i] != null) {
-				matchingTiles [i].GetComponent<SpriteRenderer> ().sprite = null;
+		List<GameObject> surroundingTiles = GetSurroundingTiles ();
+		for (int i = 0; i < surroundingTiles.Count; i++) {
+			if (surroundingTiles [i] != null) {
+				surroundingTiles [i].GetComponent<SpriteRenderer> ().sprite = null;
 			}
+			render.sprite = null;
 		}
-		render.sprite = null;
-		StopCoroutine(BoardManager.instance.FindNullTiles());
-		StartCoroutine(BoardManager.instance.FindNullTiles());
+		StopCoroutine (BoardManager.instance.FindNullTiles ());
+		StartCoroutine (BoardManager.instance.FindNullTiles ());
+		GUIManager.instance.MoveCounter--;
 	}
 
 	void OnMouseDown() {
-		//1
 		if (render.sprite == null || BoardManager.instance.IsShifting) {
 			return;
 		}
@@ -106,7 +120,17 @@ public class Tile : MonoBehaviour {
 		SFXManager.instance.PlaySFX (Clip.Swap);
 		GUIManager.instance.MoveCounter--;
 	}
+
 	private GameObject GetAdjacent(Vector2 castDir) {
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, castDir);
+		if (hit.collider != null) {
+			return hit.collider.gameObject;
+		}
+		return null;
+	}
+
+	//made this
+	private GameObject GetSurrounding(Vector2 castDir) {
 		RaycastHit2D hit = Physics2D.Raycast(transform.position, castDir);
 		if (hit.collider != null) {
 			return hit.collider.gameObject;
@@ -122,30 +146,39 @@ public class Tile : MonoBehaviour {
 		return adjacentTiles;
 	}
 
-	private List<GameObject> FindMatch(Vector2 castDir) { // 1
-		List<GameObject> matchingTiles = new List<GameObject>(); // 2
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, castDir); // 3
-		while (hit.collider != null && hit.collider.GetComponent<SpriteRenderer>().sprite == render.sprite) { // 4
+	//also made this
+	private List<GameObject> GetSurroundingTiles() {
+		List<GameObject> surroundingTiles = new List<GameObject> ();
+		for (int i = 0; i < surroundingDirections.Length; i++) {
+			surroundingTiles.Add (GetSurrounding (surroundingDirections [i]));
+		}
+		return surroundingTiles;
+	}
+
+	private List<GameObject> FindMatch(Vector2 castDir) {
+		List<GameObject> matchingTiles = new List<GameObject>();
+		RaycastHit2D hit = Physics2D.Raycast(transform.position, castDir);
+		while (hit.collider != null && hit.collider.GetComponent<SpriteRenderer>().sprite == render.sprite) {
 			matchingTiles.Add(hit.collider.gameObject);
 			hit = Physics2D.Raycast(hit.collider.transform.position, castDir);
 		}
-		return matchingTiles; // 5
+		return matchingTiles;
 	}
 
-	private void ClearMatch(Vector2[] paths) // 1
+	private void ClearMatch(Vector2[] paths)
 	{
-		List<GameObject> matchingTiles = new List<GameObject>(); // 2
-		for (int i = 0; i < paths.Length; i++) // 3
+		List<GameObject> matchingTiles = new List<GameObject>();
+		for (int i = 0; i < paths.Length; i++)
 		{
 			matchingTiles.AddRange(FindMatch(paths[i]));
 		}
-		if (matchingTiles.Count >= 2) // 4
+		if (matchingTiles.Count >= 2)
 		{
-			for (int i = 0; i < matchingTiles.Count; i++) // 5
+			for (int i = 0; i < matchingTiles.Count; i++)
 			{
 				matchingTiles[i].GetComponent<SpriteRenderer>().sprite = null; //<--- looky looky Here's the Cookie
 			}
-			matchFound = true; // 6
+			matchFound = true;
 		}
 	}
 

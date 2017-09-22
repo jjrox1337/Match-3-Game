@@ -122,6 +122,10 @@ public class BoardManager : MonoBehaviour {
 		for (int i = 0; i < nullCount; i++) { // 3
 			GUIManager.instance.Score += 50;
 			yield return new WaitForSeconds (shiftDelay);// 4
+			if(renders.Count == 1)
+			{
+				renders[0].sprite = GetNewSprite(x, ySize - 1);
+			}
 			for (int k = 0; k < renders.Count - 1; k++) { // 5
 				renders [k].sprite = renders [k + 1].sprite;
 				renders [k + 1].sprite = GetNewSprite (x, ySize - 1);

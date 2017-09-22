@@ -1,16 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Match 3 Starter\Scripts\Board and Grid\BoardManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs">
     <Files>
-      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\BoardManager.cs" Line="120" Column="4" />
-      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" Line="122" Column="24" />
-      <File FileName="Assets\Match 3 Starter\Scripts\Managers\GUIManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\BoardManager.cs" Line="87" Column="13" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" Line="63" Column="5" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Managers\GUIManager.cs" Line="79" Column="37" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Managers\GameManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Match 3 Game Starter\Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" line="78" column="1" />
       <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Match 3 Game Starter\Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" line="152" column="1" />
+      <Breakpoint file="C:\Users\Julian Bautista\Documents\Match-3-Game\Match 3 Game Starter\Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" line="91" column="1" />
+      <Breakpoint file="C:\Users\Julian Bautista\Documents\Match-3-Game\Match 3 Game Starter\Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" line="67" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
