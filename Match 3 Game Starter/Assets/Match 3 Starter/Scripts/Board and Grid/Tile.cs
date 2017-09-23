@@ -34,7 +34,7 @@ public class Tile : MonoBehaviour {
 	Vector2 upright = new Vector2 (1, 1);
 	Vector2 downleft = new Vector2 (-1, -1);
 	Vector2 downright = new Vector2 (1, -1);
-	private Vector2[] surroundingDirections = new Vector2[] { new Vector2(-1,1), new Vector2(1,1), new Vector2(-1,-1), new Vector2(1,-1), Vector2.up, Vector2.down, Vector2.left, Vector2.right };
+	//private Vector2[] surroundingDirections = new Vector2[] { new Vector2(-1,1), new Vector2(1,1), new Vector2(-1,-1), new Vector2(1,-1), Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 	private Vector2[] adjacentDirections = new Vector2[] { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 
 	private bool matchFound = false;
@@ -130,8 +130,8 @@ public class Tile : MonoBehaviour {
 	}
 
 	//made this
-	private GameObject GetSurrounding(Vector2 castDir) {
-		RaycastHit2D hit = Physics2D.Raycast(transform.position, castDir);
+	private GameObject GetSurrounding(Vector2 castDir, Vector2 startPos) {
+		RaycastHit2D hit = Physics2D.Raycast(startPos, castDir);
 		if (hit.collider != null) {
 			return hit.collider.gameObject;
 		}
@@ -147,11 +147,30 @@ public class Tile : MonoBehaviour {
 	}
 
 	//also made this
-	private List<GameObject> GetSurroundingTiles() {
+		/*private List<GameObject> GetSurroundingTiles() {
 		List<GameObject> surroundingTiles = new List<GameObject> ();
 		for (int i = 0; i < surroundingDirections.Length; i++) {
 			surroundingTiles.Add (GetSurrounding (surroundingDirections [i]));
 		}
+		return surroundingTiles;
+	}*/
+
+	private List<GameObject> GetSurroundingTiles() {
+		List<GameObject> surroundingTiles = new List<GameObject> ();
+		GameObject topObject = GetAdjacent(Vector2.up);
+		if (topObject != null) {
+			surroundingTiles.Add (topObject);
+			surroundingTiles.Add (GetSurrounding (Vector2.left, topObject.transform.position));
+			surroundingTiles.Add (GetSurrounding (Vector2.right, topObject.transform.position));
+		}
+		GameObject bottomObject = GetAdjacent (Vector2.down);
+		if (bottomObject != null) {
+			surroundingTiles.Add (bottomObject);
+			surroundingTiles.Add (GetSurrounding (Vector2.left, bottomObject.transform.position));
+			surroundingTiles.Add (GetSurrounding (Vector2.right, bottomObject.transform.position));
+		}
+		surroundingTiles.Add (GetSurrounding (Vector2.left, transform.position));
+		surroundingTiles.Add (GetSurrounding (Vector2.right, transform.position));
 		return surroundingTiles;
 	}
 
