@@ -22,7 +22,7 @@
 
 using UnityEngine;
 
-public enum Clip { Select, Swap, Clear };
+public enum Clip { Select, Swap, Clear, Incorrect };
 
 public class SFXManager : MonoBehaviour {
 	public static SFXManager instance;

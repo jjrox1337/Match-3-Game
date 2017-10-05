@@ -1,11 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Match 3 Starter\Scripts\Managers\GUIManager.cs">
     <Files>
       <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\BoardManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" Line="137" Column="4" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" Line="25" Column="9" />
       <File FileName="Assets\Match 3 Starter\Scripts\Managers\GUIManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Match 3 Starter\Scripts\Managers\GameManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Managers\SFXManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

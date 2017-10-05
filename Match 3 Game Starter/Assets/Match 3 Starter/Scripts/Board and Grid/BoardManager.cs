@@ -46,8 +46,8 @@ public class BoardManager : MonoBehaviour {
 
         float startX = transform.position.x;
 		float startY = transform.position.y;
-		Sprite[] previousLeft = new Sprite[ySize]; // 1
-		Sprite previousBelow = null; // 2
+		Sprite[] previousLeft = new Sprite[ySize];
+		Sprite previousBelow = null;
 
 		int bombCounter = 0;
 
@@ -55,42 +55,30 @@ public class BoardManager : MonoBehaviour {
 			for (int y = 0; y < ySize; y++) {
 				GameObject newTile = Instantiate(tile, new Vector3(startX + (xOffset * x), startY + (yOffset * y), 0), tile.transform.rotation);
 				tiles[x, y] = newTile;
-				newTile.transform.parent = transform; // 1
+				newTile.transform.parent = transform;
 
-				List<Sprite> possibleCharacters = new List<Sprite>(); // 1.1
+				List<Sprite> possibleCharacters = new List<Sprite>();
 				possibleCharacters.AddRange(characters);
-				possibleCharacters.Remove(previousLeft[y]); // 1.2
+				possibleCharacters.Remove(previousLeft[y]);
 				possibleCharacters.Remove(previousBelow);
 
-				Sprite newSprite = possibleCharacters[Random.Range(0, possibleCharacters.Count)]; // 2
+				Sprite newSprite = possibleCharacters[Random.Range(0, possibleCharacters.Count)];
 				if (newSprite.name	== "bomb") {
 					bombCounter++;
-					if (bombCounter <= 10) {
+					if (bombCounter <= 20) {
 						newSprite = possibleCharacters [Random.Range (0, possibleCharacters.Count)];
 					} else {
 						bombCounter = 0;
 					}
 				}
 				// put stuff here? :p
-				newTile.GetComponent<SpriteRenderer>().sprite = newSprite; // 3
+				newTile.GetComponent<SpriteRenderer>().sprite = newSprite;
 				previousLeft[y] = newSprite;
 				previousBelow = newSprite;
 			}
         }
     }
-
-	//public void CheckBomb() {
-		//int bombCounter = 0;
-		//if (bombCounter == 1) {
-			//bombCounter = 0;
-			//return;
-		//} else {
-			//if (newSprite == 8) {
-				//bombCounter = bombCounter + 1;
-				//newSprite = possibleCharacters[Random.Range(1, 7)];
-			//}
-		//}
-	//}
+		
 	public IEnumerator FindNullTiles() {
 		for (int x = 0; x < xSize; x++) {
 			for (int y = 0; y < ySize; y++) {
@@ -111,22 +99,22 @@ public class BoardManager : MonoBehaviour {
 		List<SpriteRenderer> renders = new List<SpriteRenderer> ();
 		int nullCount = 0;
 
-		for (int y = yStart; y < ySize; y++) {  // 1
+		for (int y = yStart; y < ySize; y++) {
 			SpriteRenderer render = tiles [x, y].GetComponent<SpriteRenderer> ();
-			if (render.sprite == null) { // 2
+			if (render.sprite == null) {
 				nullCount++;
 			}
 			renders.Add (render);
 		}
 
-		for (int i = 0; i < nullCount; i++) { // 3
-			GUIManager.instance.Score += 50;
-			yield return new WaitForSeconds (shiftDelay);// 4
+		for (int i = 0; i < nullCount; i++) {
+			GUIManager.instance.Score += 50; //Adds points to score
+			yield return new WaitForSeconds (shiftDelay);
 			if(renders.Count == 1)
 			{
 				renders[0].sprite = GetNewSprite(x, ySize - 1);
 			}
-			for (int k = 0; k < renders.Count - 1; k++) { // 5
+			for (int k = 0; k < renders.Count - 1; k++) {
 				renders [k].sprite = renders [k + 1].sprite;
 				renders [k + 1].sprite = GetNewSprite (x, ySize - 1);
 			}
