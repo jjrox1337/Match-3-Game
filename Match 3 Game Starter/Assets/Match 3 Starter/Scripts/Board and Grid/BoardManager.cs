@@ -71,7 +71,6 @@ public class BoardManager : MonoBehaviour {
 						bombCounter = 0;
 					}
 				}
-				// put stuff here? :p
 				newTile.GetComponent<SpriteRenderer>().sprite = newSprite;
 				previousLeft[y] = newSprite;
 				previousBelow = newSprite;
@@ -79,6 +78,14 @@ public class BoardManager : MonoBehaviour {
         }
     }
 		
+	public void ClearAll() {
+		for (int x = 0; x < xSize; x++) {
+			for (int y = 0; y < ySize; y++) {
+				tiles [x, y].GetComponent<SpriteRenderer> ().sprite = null;
+			}
+		}
+	}
+
 	public IEnumerator FindNullTiles() {
 		for (int x = 0; x < xSize; x++) {
 			for (int y = 0; y < ySize; y++) {

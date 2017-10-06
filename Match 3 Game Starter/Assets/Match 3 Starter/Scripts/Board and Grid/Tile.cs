@@ -69,17 +69,6 @@ public class Tile : MonoBehaviour {
 		GUIManager.instance.MoveCounter--;
 	}
 
-	/* OnMouseDown {
-	 * if (move == match){
-	 * swap
-	 * match
-	 * play match sound
-	 * } else {
-	 * don't swap
-	 * play buzzer or something
-	 * }
-	 */
-
 	void OnMouseDown() {
 		if (render.sprite == null || BoardManager.instance.IsShifting) {
 			return;
@@ -93,25 +82,20 @@ public class Tile : MonoBehaviour {
 			if (previousSelected == null) { //Is it the first tile selected?
 				Select ();
 			} else {
-				/*if (previousSelected.GetComponent<SpriteRenderer> ().sprite == render.sprite) {
-					Debug.Log ("test");
-				} else {*/
 					if (GetAllAdjacentTiles ().Contains (previousSelected.gameObject)) {
 						SwapSprite (previousSelected.render);
-						
 						previousSelected.ClearAllMatches();
-
 						ClearAllMatches();
 						if (matchOccured == false) {
 							SwapSprite (previousSelected.render);
-						GUIManager.instance.MoveCounter = GUIManager.instance.MoveCounter + 1;
+							GUIManager.instance.MoveCounter = GUIManager.instance.MoveCounter + 1;
 							SFXManager.instance.PlaySFX (Clip.Incorrect);
 						}
-						previousSelected.Deselect ();
-						matchOccured = false;
-						} else {
-							previousSelected.GetComponent<Tile> ().Deselect ();
-							Select ();
+			previousSelected.Deselect ();
+			matchOccured = false;
+			} else {
+				previousSelected.GetComponent<Tile> ().Deselect ();
+				Select ();
 						}
 					}
 				}
@@ -136,8 +120,7 @@ public class Tile : MonoBehaviour {
 		}
 		return null;
 	}
-
-	//made this
+		
 	private GameObject GetSurrounding(Vector2 castDir, Vector2 startPos) {
 		RaycastHit2D hit = Physics2D.Raycast(startPos, castDir);
 		if (hit.collider != null) {
@@ -194,6 +177,15 @@ public class Tile : MonoBehaviour {
 		{
 			for (int i = 0; i < matchingTiles.Count; i++)
 			{
+				/*if (matchingTiles[i] = "bomb"){
+					superbomb++;
+					if (superbomb >= 3) {
+						superbomb = 0;
+						BoardManager.instance.ClearAll ();
+						StopCoroutine (BoardManager.instance.FindNullTiles ());
+						StartCoroutine (BoardManager.instance.FindNullTiles ());
+					}
+				}*/
 				matchingTiles[i].GetComponent<SpriteRenderer>().sprite = null; //<--- looky looky Here's the Cookie
 			}
 			matchFound = true;
@@ -202,9 +194,6 @@ public class Tile : MonoBehaviour {
 
 	public void ClearAllMatches ()
 	{
-		
-
-
 		if (render.sprite == null)
 			return;
 
