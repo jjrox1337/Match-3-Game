@@ -84,6 +84,8 @@ public class BoardManager : MonoBehaviour {
 				tiles [x, y].GetComponent<SpriteRenderer> ().sprite = null;
 			}
 		}
+		StopCoroutine (BoardManager.instance.FindNullTiles ());
+		StartCoroutine (BoardManager.instance.FindNullTiles ());
 	}
 
 	public IEnumerator FindNullTiles() {
@@ -94,6 +96,7 @@ public class BoardManager : MonoBehaviour {
 					break;
 				}
 			}
+
 		}
 		for (int x = 0; x < xSize; x++) {
 			for (int y = 0; y < ySize; y++) {

@@ -177,15 +177,6 @@ public class Tile : MonoBehaviour {
 		{
 			for (int i = 0; i < matchingTiles.Count; i++)
 			{
-				/*if (matchingTiles[i] = "bomb"){
-					superbomb++;
-					if (superbomb >= 3) {
-						superbomb = 0;
-						BoardManager.instance.ClearAll ();
-						StopCoroutine (BoardManager.instance.FindNullTiles ());
-						StartCoroutine (BoardManager.instance.FindNullTiles ());
-					}
-				}*/
 				matchingTiles[i].GetComponent<SpriteRenderer>().sprite = null; //<--- looky looky Here's the Cookie
 			}
 			matchFound = true;
@@ -200,15 +191,20 @@ public class Tile : MonoBehaviour {
 		ClearMatch (new Vector2[2] { Vector2.left, Vector2.right });
 		ClearMatch (new Vector2[2] { Vector2.up, Vector2.down });
 		if (matchFound == true) {
-			render.sprite = null;
-			matchFound = false;
+			if (render.sprite.name == "bomb") {
+				BoardManager.instance.ClearAll ();
+				matchFound = false;
+			} else {
+				render.sprite = null;
+				matchFound = false;
 
-			StopCoroutine (BoardManager.instance.FindNullTiles ());
-			StartCoroutine (BoardManager.instance.FindNullTiles ());
+				StopCoroutine (BoardManager.instance.FindNullTiles ());
+				StartCoroutine (BoardManager.instance.FindNullTiles ());
 
-			SFXManager.instance.PlaySFX (Clip.Clear);
+				SFXManager.instance.PlaySFX (Clip.Clear);
 
-			matchOccured = true;
+				matchOccured = true;
+			}
 		}
 	}
 }
