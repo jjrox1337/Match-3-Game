@@ -66,6 +66,7 @@ public class Tile : MonoBehaviour {
 		}
 		StopCoroutine (BoardManager.instance.FindNullTiles ());
 		StartCoroutine (BoardManager.instance.FindNullTiles ());
+		SFXManager.instance.PlaySFX (Clip.Explosion);
 		GUIManager.instance.MoveCounter--;
 	}
 
@@ -86,11 +87,11 @@ public class Tile : MonoBehaviour {
 						SwapSprite (previousSelected.render);
 						previousSelected.ClearAllMatches();
 						ClearAllMatches();
-						if (matchOccured == false) {
+					if (matchOccured == false) {
 							SwapSprite (previousSelected.render);
-							GUIManager.instance.MoveCounter = GUIManager.instance.MoveCounter + 1;
+							GUIManager.instance.MoveCounter = GUIManager.instance.MoveCounter + 2;
 							SFXManager.instance.PlaySFX (Clip.Incorrect);
-						}
+					}
 			previousSelected.Deselect ();
 			matchOccured = false;
 			} else {
@@ -193,6 +194,8 @@ public class Tile : MonoBehaviour {
 		if (matchFound == true) {
 			if (render.sprite.name == "bomb") {
 				BoardManager.instance.ClearAll ();
+				SFXManager.instance.PlaySFX (Clip.Explosion);
+				matchOccured = true;
 				matchFound = false;
 			} else {
 				render.sprite = null;

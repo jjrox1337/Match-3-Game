@@ -2,8 +2,8 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs">
     <Files>
-      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\BoardManager.cs" Line="67" Column="20" />
-      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" Line="162" Column="101" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\BoardManager.cs" Line="151" Column="1" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" Line="94" Column="33" />
       <File FileName="Assets\Match 3 Starter\Scripts\Managers\GUIManager.cs" Line="1" Column="1" />
       <File FileName="Assets\Match 3 Starter\Scripts\Managers\GameManager.cs" Line="1" Column="1" />
     </Files>
