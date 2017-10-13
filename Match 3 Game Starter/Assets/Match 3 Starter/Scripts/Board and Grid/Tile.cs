@@ -133,8 +133,7 @@ public class Tile : MonoBehaviour {
 			yield return null;
 			timer += Time.deltaTime;
 		}
-
-
+			
 		previousSelected.transform.position = prevPos;
 		transform.position = currPos;
 		SwapSprite (previousSelected.render);
