@@ -38,7 +38,7 @@ public class Tile : MonoBehaviour {
 
 	private bool matchFound = false;
 	private bool matchOccured = false;
-	private bool isAnimating = false;
+	private static bool isAnimating = false;
 
 	void Awake() {
 		render = GetComponent<SpriteRenderer>();
@@ -125,7 +125,8 @@ public class Tile : MonoBehaviour {
 		float timer = 0;
 		float timeToMove = 0.2f;
 
-		while (timer < timeToMove) {
+		while (timer < timeToMove) 
+		{
 			previousSelected.transform.position = Vector2.Lerp (prevPos, currPos, timer / timeToMove);
 			transform.position = Vector2.Lerp (currPos, prevPos, timer / timeToMove);
 
