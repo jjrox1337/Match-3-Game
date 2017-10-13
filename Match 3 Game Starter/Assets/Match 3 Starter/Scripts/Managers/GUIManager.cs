@@ -64,7 +64,7 @@ public class GUIManager : MonoBehaviour {
 	}
 
 	void Awake() {
-		moveCounter = 10;
+		moveCounter = 60;
 		moveCounterTxt.text = moveCounter.ToString();
 		instance = GetComponent<GUIManager>();
 	}

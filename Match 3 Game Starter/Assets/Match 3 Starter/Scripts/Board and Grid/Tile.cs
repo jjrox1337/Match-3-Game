@@ -38,6 +38,7 @@ public class Tile : MonoBehaviour {
 
 	private bool matchFound = false;
 	private bool matchOccured = false;
+	private bool isAnimating = false;
 
 	void Awake() {
 		render = GetComponent<SpriteRenderer>();
@@ -71,7 +72,7 @@ public class Tile : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if (render.sprite == null || BoardManager.instance.IsShifting) {
+		if (render.sprite == null || BoardManager.instance.IsShifting || isAnimating == true) {
 			return;
 		}
 		if (isSelected) { //Is it already selected?
@@ -84,7 +85,8 @@ public class Tile : MonoBehaviour {
 				Select ();
 			} else {
 					if (GetAllAdjacentTiles ().Contains (previousSelected.gameObject)) {
-						SwapSprite (previousSelected.render);
+					StartCoroutine (AnimateSwapSprite ());
+						/*SwapSprite (previousSelected.render);
 						previousSelected.ClearAllMatches();
 						ClearAllMatches();
 					if (matchOccured == false) {
@@ -93,7 +95,7 @@ public class Tile : MonoBehaviour {
 							SFXManager.instance.PlaySFX (Clip.Incorrect);
 					}
 			previousSelected.Deselect ();
-			matchOccured = false;
+			matchOccured = false;*/
 			} else {
 				previousSelected.GetComponent<Tile> ().Deselect ();
 				Select ();
@@ -112,6 +114,46 @@ public class Tile : MonoBehaviour {
 		render.sprite = tempSprite;
 		SFXManager.instance.PlaySFX (Clip.Swap);
 		GUIManager.instance.MoveCounter--;
+	}
+
+	private IEnumerator AnimateSwapSprite(bool checkMatches = true)
+	{
+		isAnimating = true;
+		Vector2 prevPos = previousSelected.transform.position;
+		Vector2 currPos = transform.position;
+
+		float timer = 0;
+		float timeToMove = 0.2f;
+
+		while (timer < timeToMove) {
+			previousSelected.transform.position = Vector2.Lerp (prevPos, currPos, timer / timeToMove);
+			transform.position = Vector2.Lerp (currPos, prevPos, timer / timeToMove);
+
+			yield return null;
+			timer += Time.deltaTime;
+		}
+
+
+		previousSelected.transform.position = prevPos;
+		transform.position = currPos;
+		SwapSprite (previousSelected.render);
+		if (checkMatches == true) {
+			previousSelected.ClearAllMatches ();
+			ClearAllMatches ();
+
+			if (matchOccured == false) {
+				StartCoroutine (AnimateSwapSprite (false));
+				GUIManager.instance.MoveCounter = GUIManager.instance.MoveCounter + 2;
+				SFXManager.instance.PlaySFX (Clip.Incorrect);
+			} else {
+				previousSelected.Deselect ();
+				isAnimating = false;
+			}
+			matchOccured = false;
+		} else {
+			previousSelected.Deselect ();
+			isAnimating = false;
+		}
 	}
 
 	private GameObject GetAdjacent(Vector2 castDir) {

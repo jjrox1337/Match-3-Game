@@ -65,7 +65,7 @@ public class BoardManager : MonoBehaviour {
 				Sprite newSprite = possibleCharacters[Random.Range(0, possibleCharacters.Count)];
 				if (newSprite.name	== "bomb") {
 					bombCounter++;
-					if (bombCounter <= 20) {
+					if (bombCounter <= 50) {
 						newSprite = possibleCharacters [Random.Range (0, possibleCharacters.Count)];
 					} else {
 						bombCounter = 0;
