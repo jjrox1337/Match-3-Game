@@ -37,7 +37,7 @@ public class Tile : MonoBehaviour {
 	private Vector2[] adjacentDirections = new Vector2[] { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
 
 	private bool matchFound = false;
-	private bool matchOccured = false;
+	private static bool matchOccured = false;
 	private static bool isAnimating = false;
 
 	void Awake() {
@@ -86,16 +86,6 @@ public class Tile : MonoBehaviour {
 			} else {
 					if (GetAllAdjacentTiles ().Contains (previousSelected.gameObject)) {
 					StartCoroutine (AnimateSwapSprite ());
-						/*SwapSprite (previousSelected.render);
-						previousSelected.ClearAllMatches();
-						ClearAllMatches();
-					if (matchOccured == false) {
-							SwapSprite (previousSelected.render);
-							GUIManager.instance.MoveCounter = GUIManager.instance.MoveCounter + 2;
-							SFXManager.instance.PlaySFX (Clip.Incorrect);
-					}
-			previousSelected.Deselect ();
-			matchOccured = false;*/
 			} else {
 				previousSelected.GetComponent<Tile> ().Deselect ();
 				Select ();
@@ -108,7 +98,6 @@ public class Tile : MonoBehaviour {
 		if (render.sprite == render2.sprite) {
 			return;
 		}
-
 		Sprite tempSprite = render2.sprite;
 		render2.sprite = render.sprite;
 		render.sprite = tempSprite;
@@ -133,10 +122,10 @@ public class Tile : MonoBehaviour {
 			yield return null;
 			timer += Time.deltaTime;
 		}
-			
 		previousSelected.transform.position = prevPos;
 		transform.position = currPos;
 		SwapSprite (previousSelected.render);
+
 		if (checkMatches == true) {
 			previousSelected.ClearAllMatches ();
 			ClearAllMatches ();
@@ -242,13 +231,12 @@ public class Tile : MonoBehaviour {
 			} else {
 				render.sprite = null;
 				matchFound = false;
+				matchOccured = true;
 
 				StopCoroutine (BoardManager.instance.FindNullTiles ());
 				StartCoroutine (BoardManager.instance.FindNullTiles ());
 
 				SFXManager.instance.PlaySFX (Clip.Clear);
-
-				matchOccured = true;
 			}
 		}
 	}
