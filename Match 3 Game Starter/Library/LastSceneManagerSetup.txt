@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Match 3 Starter/Scenes/Instructions.unity
+- path: Assets/Match 3 Starter/Scenes/Menu.unity
   isLoaded: 1
   isActive: 1
