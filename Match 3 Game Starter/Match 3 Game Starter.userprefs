@@ -1,18 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Match 3 Starter\Scripts\Managers\SFXManager.cs">
     <Files>
-      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\BoardManager.cs" Line="68" Column="27" />
-      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" Line="241" Column="24" />
-      <File FileName="Assets\Match 3 Starter\Scripts\Managers\GUIManager.cs" Line="67" Column="18" />
-      <File FileName="Assets\Match 3 Starter\Scripts\Managers\GameManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Match 3 Starter\Scripts\Managers\SFXManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\BoardManager.cs" Line="69" Column="12" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" Line="239" Column="29" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Managers\GUIManager.cs" Line="79" Column="8" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Managers\GameManager.cs" Line="123" Column="40" />
+      <File FileName="Assets\Match 3 Starter\Scripts\Managers\SFXManager.cs" Line="25" Column="61" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Match 3 Game Starter\Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" line="78" column="1" />
       <Breakpoint file="C:\Users\Public\Documents\Unity Projects\Match 3 Game Starter\Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" line="152" column="1" />
+      <Breakpoint file="C:\Users\Julian Bautista\Documents\Match-3-Game\Match 3 Game Starter\Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" line="134" column="1" />
+      <Breakpoint file="C:\Users\Julian Bautista\Documents\Match-3-Game\Match 3 Game Starter\Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" line="130" column="1" />
+      <Breakpoint file="C:\Users\Julian Bautista\Documents\Match-3-Game\Match 3 Game Starter\Assets\Match 3 Starter\Scripts\Board and Grid\Tile.cs" line="133" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
